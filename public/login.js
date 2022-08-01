@@ -3,6 +3,8 @@ function Login() {
 	const [status, setStatus] = React.useState("");
 	const ctx = React.useContext(UserContext);
 
+  
+
 	return (
 		<Card
 			bgcolor='secondary'
@@ -17,7 +19,7 @@ function Login() {
 			}
 		/>
 	);
-}
+
 
 function LoginMsg(props) {
 	return (
@@ -43,63 +45,65 @@ function LoginForm(props) {
 		if (!validateUser(email, "email")) return;
 		if (!validateUser(password, "password")) return;
 
-		const auth = firebase.auth();
-		const promise = auth.signInWithEmailAndPassword(email, password);
-		firebase.auth().onAuthStateChanged((firebaseUser) => {
-			if (firebaseUser) {
-				console.log("firebase authorization for...");
-				console.log(firebaseUser);
+		//////////////////////////////////////
+		//FIREBASE AUTH ATTEMPT
+		///////////////////////////////
 
-				fetch(`/account/login/${email}/${password}`)
-					.then((response) => response.text())
-					.then((text) => {
-						try {
-							const data = JSON.parse(text);
-							setShow(false);
-							ctx.user = data.name;
-							ctx.email = data.email;
-							setStatus(`welcome ${ctx.user}`);
-						} catch {
-							setShow(false);
-						}
-					});
-			} else {
-				setStatus(
-					"Unable to Authorize your account. Please create an account to get started"
-				);
-				setTimeout(() => setStatus(""), 25000);
-			}
-		});
-		promise.catch((e) => {
-			console.log("womp womp woooooommmp. authorization error catch");
-		});
-	}
-	//   fetch(`/account/login/${email}/${password}`)
-	//   .then(response => response.text())
-	//   .then(text => {
-	//       try {
-	//           const data = JSON.parse(text);
-	//           props.setStatus('');
-	//           props.setShow(false);
-	//           console.log('JSON:', data);
-	//       } catch(err) {
-	//           props.setStatus(text)
-	//           console.log('err:', text);
-	//       }
-	//   });
+	// 	const auth = firebase.auth();
+	// 	const promise = auth.signInWithEmailAndPassword(email, password);
+	// 	firebase.auth().onAuthStateChanged((firebaseUser) => {
+	// 		if (firebaseUser) {
+	// 			console.log("firebase authorization for...");
+	// 			console.log(firebaseUser);
+
+	// 			fetch(`/account/login/${email}/${password}`)
+	// 				.then((response) => response.text())
+	// 				.then((text) => {
+	// 					try {
+	// 						const data = JSON.parse(text);
+	// 						setShow(false);
+	// 						ctx.user = data.name;
+	// 						ctx.email = data.email;
+	// 						setStatus(`welcome ${ctx.user}`);
+	// 					} catch {
+	// 						setShow(false);
+	// 					}
+	// 				});
+	// 		} else {
+	// 			setStatus(
+	// 				"Unable to Authorize your account. Please create an account to get started"
+	// 			);
+	// 			setTimeout(() => setStatus(""), 25000);
+	// 		}
+	// 	});
+	// 	promise.catch((e) => {
+	// 		console.log("womp womp woooooommmp. authorization error catch");
+	// 	});
 	// }
-	function validateUser(field, label) {
-		if (!field) {
-			setStatus("Eeep! You've got to enter your " + label + " to login!");
-			setTimeout(() => setStatus(""), 2500);
-			return false;
-		}
-		return true;
+
+  //////////////////////////////////////
+//STARTER FILE CODE
+  ///////////////////////////////
+
+	  fetch(`/account/login/${email}/${password}`)
+	  .then(response => response.text())
+	  .then(text => {
+	      try {
+	          const data = JSON.parse(text);
+	          props.setStatus('');
+	          props.setShow(false);
+	          console.log('JSON:', data);
+	      } catch(err) {
+	          props.setStatus(text)
+	          console.log('err:', text);
+	      }
+	  });
 	}
+
 
 	return (
 		<>
-			<h3>Login in to access your account</h3>
+			<h2>Login to your Account</h2>
 			Email
 			<br />
 			<input
@@ -125,4 +129,14 @@ function LoginForm(props) {
 			</button>
 		</>
 	);
+  
+  	function validateUser(field, label) {
+			if (!field) {
+				setStatus("Eeep! You've got to enter your " + label + " to login!");
+				setTimeout(() => setStatus(""), 2500);
+				return false;
+			}
+			return true;
+		}
+}
 }
