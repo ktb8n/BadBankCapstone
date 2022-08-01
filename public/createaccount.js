@@ -1,7 +1,7 @@
 function CreateAccount() {
 	const [show, setShow] = React.useState(true);
 	const [status, setStatus] = React.useState("");
-	const ctx = React.useContext(UserContext);
+	const [user, setUser]     = React.useState("")
 
 	return (
 		<Card
