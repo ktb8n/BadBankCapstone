@@ -1,30 +1,35 @@
 function Login() {
-	const [show, setShow] = React.useState(true);
-	const [status, setStatus] = React.useState("");
-	const ctx = React.useContext(UserContext);
+	const [show, setShow]         = React.useState(true);
+	const [status, setStatus]     = React.useState("");
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [msg, setMsg]           = React.useState("");
+  const [user, setUser]         = React.useState("");
+	const ctx                     = React.useContext(UserContext);
 
   
 
 	return (
-		<Card
-			bgcolor='secondary'
-			header='Login'
-			status={status}
-			body={
-				show ? (
-					<LoginForm setShow={setShow} setStatus={setStatus} />
-				) : (
-					<LoginMsg setShow={setShow} setStatus={setStatus} />
-				)
-			}
-		/>
+		<>
+			<Card
+				bgcolor='secondary'
+				header='Login'
+				status={status}
+				body={
+					show ? (
+						<LoginForm setShow={setShow} setStatus={setStatus} />
+					) : (
+						<LoginMsg setShow={setShow} setStatus={setStatus} />
+					)
+				}
+			/>
+		</>
 	);
 
 
 function LoginMsg(props) {
 	return (
 		<>
-			<h5>Success</h5>
+			{loggedIn ? <h2> Welcome, {user}</h2> : <h2></h2>}
 			<button
 				type='submit'
 				className='btn btn-light'
@@ -92,6 +97,8 @@ function LoginForm(props) {
 	          const data = JSON.parse(text);
 	          props.setStatus('');
 	          props.setShow(false);
+            setLoggedIn(true);
+            setUser(data.name);
 	          console.log('JSON:', data);
 	      } catch(err) {
 	          props.setStatus(text)
