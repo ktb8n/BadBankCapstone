@@ -4,7 +4,7 @@ const Route       = ReactRouterDOM.Route;
 const Link        = ReactRouterDOM.Link;
 const HashRouter  = ReactRouterDOM.HashRouter;
 const UserContext = React.createContext(null);
-
+const Display = React.createContext(null);
 
 		//////////////////////////////////////
 		//FIREBASE AUTH ATTEMPT
@@ -18,8 +18,8 @@ const UserContext = React.createContext(null);
 //// TODO: Add SDKs for Firebase products that you want to use
 // //https://firebase.google.com/docs/web/setup#available-libraries
 
-// //Your web app's Firebase configuration
-//// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAw7Qcg8uluwFRoBHXnRxyog33sIrulugE",
 //   authDomain: "bad-bank-ktb8n.firebaseapp.com",
