@@ -40,7 +40,6 @@ function CreateAccount() {
 		const [name, setName] = React.useState("");
 		const [email, setEmail] = React.useState("");
 		const [password, setPassword] = React.useState("");
-		const [balance, setBalance] = React.useState(1000);
 
 		function handle() {
 			console.log("create account initiated");
@@ -61,6 +60,7 @@ function CreateAccount() {
 
 		return (
 			<>
+      <h2>Create Account</h2>
 				Name
 				<br />
 				<input
