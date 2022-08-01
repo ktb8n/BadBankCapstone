@@ -61,7 +61,6 @@ function BalanceForm(props) {
 
 	function handle() {
     validateEntry();
-    setLoggedIn(true);
     console.log("handling...");
 		fetch(`/account/findOne/${ctx.email}`)
 			.then((response) => response.text())
@@ -73,8 +72,8 @@ function BalanceForm(props) {
 					setBalance(user.balance);
 					console.log(balance);
 				} catch (err) {
-					//props.setStatus(text);
-					console.log("err:", balance);
+					props.setStatus(text);
+					console.log("err:", text);
 				}
 			});
 	}
