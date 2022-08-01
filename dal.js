@@ -1,10 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
 const url =
 	"mongodb+srv://admin:admin@cluster0.wvtjpsp.mongodb.net/?retryWrites=true&w=majority";
-let db            = null;
+let db = null;
  
 // connect to mongo
-MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client){
     console.log("Connected successfully to db server");
 
     // connect to myproject database
@@ -15,7 +15,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
 function create(name, email, password){
     return new Promise((resolve, reject) => {    
         const collection = db.collection('users');
-        const doc = {name, email, password, balance: 0};
+        const doc = {name, email, password, balance: 100};
         collection.insertOne(doc, {w:1}, function(err, result) {
             err ? reject(err) : resolve(doc);
         });    
@@ -24,7 +24,8 @@ function create(name, email, password){
 
 // find user account
 function find(email){
-    return new Promise((resolve, reject) => {    
+    return new Promise((resolve, reject) => {  
+        console.log("dal called find"); 
         const customers = db
             .collection('users')
             .find({email: email})
@@ -37,6 +38,7 @@ function find(email){
 // find user account
 function findOne(email){
     return new Promise((resolve, reject) => {    
+        console.log("dal called findone"); 
         const customers = db
             .collection('users')
             .findOne({email: email})

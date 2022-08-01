@@ -7,7 +7,7 @@
 		"test": "jest",
 		"start": "node index.js"
 	},
-	"author": "abel@mit.edu",
+	"author": "",
 	"license": "MIT",
 	"dependencies": {
 		"cors": "^2.8.5",
