@@ -99,6 +99,8 @@ function LoginForm(props) {
 	          props.setShow(false);
             setLoggedIn(true);
             setUser(data.name);
+            ctx.user = data.name;
+            ctx.email = data.email;
 	          console.log('JSON:', data);
 	      } catch(err) {
 	          props.setStatus(text)
