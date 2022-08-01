@@ -4,7 +4,7 @@ function Home(){
       txtcolor="black"
       header="Better Banking LLC"
       title="Welcome!"
-      text="You can move around using the navigation bar."
+      text="Login or Create an Account to get started"
       
     />
   );  
