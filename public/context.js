@@ -1,7 +1,35 @@
+
+import { initializeApp } from "firebase/app";
+import { Authorization } from `firebase/auth`;
+
 const Route       = ReactRouterDOM.Route;
 const Link        = ReactRouterDOM.Link;
 const HashRouter  = ReactRouterDOM.HashRouter;
 const UserContext = React.createContext(null);
+
+
+
+
+// Import the functions you need from the SDKs you need
+//import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAw7Qcg8uluwFRoBHXnRxyog33sIrulugE",
+  authDomain: "bad-bank-ktb8n.firebaseapp.com",
+  projectId: "bad-bank-ktb8n",
+  storageBucket: "bad-bank-ktb8n.appspot.com",
+  messagingSenderId: "336028486534",
+  appId: "1:336028486534:web:bf16fcf21de702273e3a07"
+  //measurementId: "G-K3JWZ465LF"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+//firebaseConfig.initializeApp(firebaseConfig); I tried this too
 
 function Card(props){
   function classes(){
