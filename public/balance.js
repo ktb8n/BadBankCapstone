@@ -2,8 +2,15 @@ function Balance() {
 	const [show, setShow] = React.useState(true);
 	const [status, setStatus] = React.useState("");
   const [user, setUser] = React.useState("");
+  const ctx = React.useContext(UserContext);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [balance, setBalance]   = React.useState("");
+
 
 	return (
+    <>	{
+		loggedIn ? <h2> Welcome, {user}</h2> : <h2></h2>
+	}
 		<Card
 			bgcolor='info'
 			header='Balance'
@@ -16,14 +23,15 @@ function Balance() {
 				)
 			}
 		/>
+    </>
 	);
 
 
-function validateEntry(field, label) {
-  if (!field) {
-    setStatus("Well... you've gotta give us SOMETHING. Try your " + label);
+function validateEntry() {
+  if (!loggedIn) {
+    console.log("validating...");
+    setStatus("Please login to check your balance.");
     setShow(true);
-    setTimeout(() => setStatus(""),2500);
     return false;
   }
   return true;
@@ -33,12 +41,12 @@ function validateEntry(field, label) {
 function BalanceMsg(props) {
 	return (
 		<>
-			<h5>Success</h5>
+			{loggedIn ? <h5>{balance}</h5> : <h5>Not Logged In</h5>}
 			<button
 				type='submit'
 				className='btn btn-light'
 				onClick={() => {
-        
+          setStatus('Current Balance:' + balance);
 					props.setShow(true);
 					props.setStatus("");
 				}}
@@ -50,30 +58,37 @@ function BalanceMsg(props) {
 }
 
 function BalanceForm(props) {
-	const [email, setEmail] = React.useState("");
 
 	function handle() {
     validateEntry();
+    setLoggedIn(true);
     console.log("handling...");
-		fetch(`/account/findOne/${email}`)
+		fetch(`/account/findOne/${ctx.email}`)
 			.then((response) => response.text())
 			.then((text) => {
 				try {
 					const data = JSON.parse(text);
-					props.setStatus(text);
+					setUser(data);
 					props.setShow(false);
 					setBalance(user.balance);
-					console.log("JSON:", data);
+					console.log(balance);
 				} catch (err) {
-					props.setStatus(text);
-					console.log("err:", text);
+					//props.setStatus(text);
+					console.log("err:", balance);
 				}
 			});
 	}
 
 	return (
 		<>
-			Email
+			{ctx === "" ? (
+				<h4> You must login to continue</h4>
+			) : (
+				<h4> Welcome, {ctx.name}</h4>
+			)}
+			<h2>Got money? Let's find out:</h2>
+
+			{/* Email
 			<br />
 			<input
 				type='input'
@@ -82,7 +97,7 @@ function BalanceForm(props) {
 				value={email}
 				onChange={(e) => setEmail(e.currentTarget.value)}
 			/>
-			<br />
+			<br /> */}
 			<button type='submit' className='btn btn-light' onClick={handle}>
 				Check Balance
 			</button>
