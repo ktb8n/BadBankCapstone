@@ -1,6 +1,7 @@
 function Balance() {
 	const [show, setShow] = React.useState(true);
 	const [status, setStatus] = React.useState("");
+  const [user, setUser] = React.useState("");
 
 	return (
 		<Card
@@ -16,7 +17,18 @@ function Balance() {
 			}
 		/>
 	);
+
+
+function validateEntry(field, label) {
+  if (!field) {
+    setStatus("Well... you've gotta give us SOMETHING. Try your " + label);
+    setShow(true);
+    setTimeout(() => setStatus(""),2500);
+    return false;
+  }
+  return true;
 }
+
 
 function BalanceMsg(props) {
 	return (
@@ -26,6 +38,7 @@ function BalanceMsg(props) {
 				type='submit'
 				className='btn btn-light'
 				onClick={() => {
+        
 					props.setShow(true);
 					props.setStatus("");
 				}}
@@ -38,9 +51,10 @@ function BalanceMsg(props) {
 
 function BalanceForm(props) {
 	const [email, setEmail] = React.useState("");
-	const [balance, setBalance] = React.useState("");
 
 	function handle() {
+    validateEntry();
+    console.log("handling...");
 		fetch(`/account/findOne/${email}`)
 			.then((response) => response.text())
 			.then((text) => {
@@ -74,4 +88,5 @@ function BalanceForm(props) {
 			</button>
 		</>
 	);
+}
 }
