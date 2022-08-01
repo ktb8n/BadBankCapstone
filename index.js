@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var cors = require("cors");
 var dal = require("./dal.js");
-const e = require("express");
+//const e = require("express");
 
 // used to serve static files from public directory
 app.use(express.static("public"));
@@ -39,7 +39,7 @@ app.get("/account/login/:email/:password", function (req, res) {
 				res.send("Login failed: wrong password");
 			}
 		} else {
-			res.send("Login failed: user not found");
+			res.send("Login failed: user not found. Please create an account to login");
 		}
 	});
 });
