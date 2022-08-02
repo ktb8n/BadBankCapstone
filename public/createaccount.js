@@ -22,13 +22,15 @@ function CreateAccount() {
 		return (
 			<>
 				<h5>Success</h5>
-				<button
-					type='submit'
-					className='btn btn-light'
-					onClick={() => props.setShow(true)}
-				>
-					Add another account
-				</button>
+				<a href='#/login/'>
+					<button
+						type='submit'
+						className='btn btn-light'
+						
+					>
+						Login 
+					</button>
+				</a>
 				{/* <button onClick={component={Login}}>
 				Login
 			</button> */}
