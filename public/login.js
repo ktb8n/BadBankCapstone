@@ -1,9 +1,8 @@
 function Login() {
 	const [show, setShow]         = React.useState(true);
 	const [status, setStatus]     = React.useState("");
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [msg, setMsg]           = React.useState("");
-  const [user, setUser]         = React.useState("");
+ 	const [loggedIn, setLoggedIn] = React.useState(false);
+ 	const [user, setUser]         = React.useState("");
 	const ctx                     = React.useContext(UserContext);
 
   
@@ -29,14 +28,29 @@ function Login() {
 function LoginMsg(props) {
 	return (
 		<>
-			{loggedIn ? <h2> Welcome, {user}</h2> : <h2></h2>}
-			<button
-				type='submit'
-				className='btn btn-light'
-				onClick={() => props.setShow(true)}
-			>
-				Authenticate again
-			</button>
+			{loggedIn ? (
+				<div>
+					<h2> Welcome, {user} ! </h2>{" "}
+					<h6>What would you like to do:</h6>
+				</div>
+			) : (
+				<h2></h2>
+			)}
+			<div className='welcomeButton'>
+				<a href='/#balance/'>
+					<button className='btn btn-info'>Check Balance</button>
+				</a>
+			</div>
+			<div className='welcomeButton'>
+				<a href='/#withdraw/'>
+					<button className='btn btn-success'>Withdraw</button>
+				</a>
+			</div>
+			<div className='welcomeButton'>
+				<a href='/#deposit/'>
+					<button className='btn btn-warning'>Deposit</button>
+				</a>
+			</div>
 		</>
 	);
 }
