@@ -5,6 +5,7 @@ const Link        = ReactRouterDOM.Link;
 const HashRouter  = ReactRouterDOM.HashRouter;
 const UserContext = React.createContext(null);
 const Display = React.createContext(null);
+const [balance, setBalance] = React.useState("");
 
 		//////////////////////////////////////
 		//FIREBASE AUTH ATTEMPT
