@@ -115,7 +115,10 @@ function LoginForm(props) {
             setUser(data.name);
             ctx.user = data.name;
             ctx.email = data.email;
+			ctx.balance = data.balance;
+			setLoggedIn(true);
 	          console.log('JSON:', data);
+			  console.log(loggedIn);
 	      } catch(err) {
 	          props.setStatus(text)
 	          console.log('err:', text);

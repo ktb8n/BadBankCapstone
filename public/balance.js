@@ -3,14 +3,14 @@ function Balance() {
 	const [status, setStatus] = React.useState("");
   const [user, setUser] = React.useState("");
   const ctx = React.useContext(UserContext);
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState();
   const [balance, setBalance]   = React.useState("");
 
+console.log(ctx);
+console.log(user);
 
 	return (
-    <>	{
-		loggedIn ? <h2> Welcome, {user}</h2> : <h2></h2>
-	}
+    <>	
 		<Card
 			bgcolor='info'
 			header='Balance'
@@ -80,26 +80,23 @@ function BalanceForm(props) {
 
 	return (
 		<>
-			{ctx === "" ? (
-				<h4> You must login to continue</h4>
+			{!loggedIn ? (
+				<div>
+					<h4> You must login to see your balance</h4>
+					<a href='/#login/'>
+						<button className='btn btn-secondary'>Login</button>
+					</a>
+				</div>
 			) : (
-				<h4> Welcome, {ctx.name}</h4>
-			)}
-			<h2>Got money? Let's find out:</h2>
+				<div>
+					<h4> Welcome, {ctx.name}</h4>
 
-			{/* Email
-			<br />
-			<input
-				type='input'
-				className='form-control'
-				placeholder='Enter email'
-				value={email}
-				onChange={(e) => setEmail(e.currentTarget.value)}
-			/>
-			<br /> */}
-			<button type='submit' className='btn btn-light' onClick={handle}>
-				Check Balance
-			</button>
+					<h2>
+						{status}: {ctx.balance}
+					</h2>
+				</div>
+			)}
+
 		</>
 	);
 }
