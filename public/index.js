@@ -1,4 +1,4 @@
-function Spa() {
+function App() {
   const [user, setUser] = React.useState(null);
   return (
     <HashRouter>
@@ -22,6 +22,6 @@ function Spa() {
 }
 
 ReactDOM.render(
-  <Spa/>,
+  <App/>,
   document.getElementById('root')
 );
