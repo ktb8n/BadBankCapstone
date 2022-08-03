@@ -1,13 +1,5 @@
 function Balance() {
-  const ctx = React.useContext(UserContext);
-  const [loggedIn, setLoggedIn] = React.useState();
-
-
-console.log(ctx.user);
-ctx.user ? (setLoggedIn(true)) : (<h2></h2>);
-
-  //this works with logged in user
-console.log(ctx);
+const ctx = React.useContext(UserContext);
 
 
 	return (
@@ -15,8 +7,8 @@ console.log(ctx);
 			<Card
 				bgcolor='info'
 				header='Balance'
-				body={
-					!loggedIn ? (
+				body={ 
+					!ctx.user? (
 						<div>
 							<h4> You must login to see your balance</h4>
 							<a href='/#login/'>
@@ -25,10 +17,10 @@ console.log(ctx);
 						</div>
 					) : (
 						<div>
-							<h4> Welcome, {ctx.user}</h4>
+							<h4> Welcome, {ctx.user.name}</h4>
 
 							<h2>
-								Your current balance is: {ctx.balance}
+								Your current balance is: {ctx.user.balance}
 							</h2>
 						</div>
 					)
@@ -36,4 +28,4 @@ console.log(ctx);
 			/>
 		</>
 	);
-			}
+}

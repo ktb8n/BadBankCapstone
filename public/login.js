@@ -1,7 +1,7 @@
 function Login() {
 	const [show, setShow]         = React.useState(true);
 	const [status, setStatus]     = React.useState("");
- 	const [loggedIn, setLoggedIn] = React.useState(false);
+ 	const [loggedIn, setLoggedIn] = React.useState();
  	const [user, setUser]         = React.useState("");
 	const ctx                     = React.useContext(UserContext);
 
@@ -64,45 +64,6 @@ function LoginForm(props) {
 		if (!validateUser(email, "email")) return;
 		if (!validateUser(password, "password")) return;
 
-		//////////////////////////////////////
-		//FIREBASE AUTH ATTEMPT
-		///////////////////////////////
-
-	// 	const auth = firebase.auth();
-	// 	const promise = auth.signInWithEmailAndPassword(email, password);
-	// 	firebase.auth().onAuthStateChanged((firebaseUser) => {
-	// 		if (firebaseUser) {
-	// 			console.log("firebase authorization for...");
-	// 			console.log(firebaseUser);
-
-	// 			fetch(`/account/login/${email}/${password}`)
-	// 				.then((response) => response.text())
-	// 				.then((text) => {
-	// 					try {
-	// 						const data = JSON.parse(text);
-	// 						setShow(false);
-	// 						ctx.user = data.name;
-	// 						ctx.email = data.email;
-	// 						setStatus(`welcome ${ctx.user}`);
-	// 					} catch {
-	// 						setShow(false);
-	// 					}
-	// 				});
-	// 		} else {
-	// 			setStatus(
-	// 				"Unable to Authorize your account. Please create an account to get started"
-	// 			);
-	// 			setTimeout(() => setStatus(""), 25000);
-	// 		}
-	// 	});
-	// 	promise.catch((e) => {
-	// 		console.log("womp womp woooooommmp. authorization error catch");
-	// 	});
-	// }
-
-  //////////////////////////////////////
-//STARTER FILE CODE
-  ///////////////////////////////
 
 	  fetch(`/account/login/${email}/${password}`)
 	  .then(response => response.text())
@@ -111,14 +72,13 @@ function LoginForm(props) {
 	          const data = JSON.parse(text);
 	          props.setStatus('');
 	          props.setShow(false);
+			  ctx.setUser(data);
             setLoggedIn(true);
             setUser(data.name);
             ctx.user = data.name;
             ctx.email = data.email;
 			ctx.balance = data.balance;
-			setLoggedIn(true);
 	          console.log('JSON:', data);
-			  console.log(loggedIn);
 	      } catch(err) {
 	          props.setStatus(text)
 	          console.log('err:', text);
