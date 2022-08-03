@@ -46,7 +46,7 @@ function DepositForm(props) {
 			.then((text) => {
 				try {
 					const data = JSON.parse(text);
-					props.setStatus(JSON.stringify(data.value));
+					props.setStatus(`You've deposited ${amount}!`);
 					props.setShow(false);
 					console.log("JSON:", data);
 				} catch (err) {

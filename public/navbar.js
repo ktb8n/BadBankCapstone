@@ -1,8 +1,9 @@
-function NavBar(){
+function NavBar(){	
+const ctx = React.useContext(UserContext);
   return (
 		<nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
 			<a className='navbar-brand' href='#'>
-				BB Home
+				Welcome!
 			</a>
 			<button
 				className='navbar-toggler'

@@ -1,8 +1,6 @@
 function Withdraw() {
 	const [show, setShow] = React.useState(true);
 	const [status, setStatus] = React.useState("");
-  const ctx = React.useContext(UserContext);
-console.log(status);
 
 	return (
 		<Card
@@ -10,13 +8,9 @@ console.log(status);
 			header='Withdraw'
 			status={status}
 			body={
-									!ctx.user? (
-						<div>
-							<h4> You must login to see your withdraw funds</h4>
-							<a href='/#login/'>
-								<button className='btn btn-secondary'>Login</button>
-							</a>
-						</div>): (
+				show ? (
+					<WithdrawForm setShow={setShow} setStatus={setStatus} />
+				) : (
 					<WithdrawMsg setShow={setShow} setStatus={setStatus} />
 				)
 			}
@@ -27,7 +21,7 @@ console.log(status);
 function WithdrawMsg(props) {
 	return (
 		<>
-			<h5>Amount to withdraw:</h5>
+			<h5>Success</h5>
 			<button
 				type='submit'
 				className='btn btn-light'
